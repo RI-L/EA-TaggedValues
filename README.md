@@ -1,18 +1,9 @@
 
-![Tagged Values Example (BoldForDelphi)](/images/TaggedValues%20Example--BoldForDelphi-Class.png)
+# **TaggedValue Helper for EA**
 
-#**TaggedValue Helper for EA**
+*For some information about the background for this TaggedValue Helper, see a discussion thread at EA's forum in [this link](https://www.sparxsystems.com/forums/smf/index.php/topic,11204.msg149795.html#msg149795)*
 
-<dl>
-<table>
-<tr><td>Author:</td><td>Rolf Lampa, rolf.lampa@rilnet.com</td></tr>
-<tr><td>Copyright:</td><td>(C) Rolf Lampa, 2015. This script is free to use for commercial projects provided that proper attribution is given to the author, and providing this copyright info in a visible place in your code and product documentation, including a link to this page.</td></tr>
-</table>
-</dl>
-
-*For some information about the background for this TaggedValue Helper, see a discussion  thread at EA's forum ni [this link](http://www.sparxsystems.com/cgi-bin/yabb/YaBB.cgi?num=1448991338/15#15 "Chart of Different Property Names, etc")*
-
-####TOC
+#### TOC
 * [Providing Consistent Property Names](README.md#providing-consistent-property-names)<br>
 * [Better Properties](README.md#better-properties)<br>
 * [More Properties](README.md#more-properties)<br>
@@ -23,24 +14,30 @@
 * [Statistics](README.md#statistics)<br>
 * [Todo](README.md#todo)<br>
 * [CLASS MEMBERS](README.md#class-members)<br>
-* [Donations](README.md#donations)<br>
 
-####**Providing Consistent Property Names**
-<img src="http://wiki.rilpartner.se/w/images/wiki.rilpartner.se/2/2d/EA-TaggedValue-System.jpg" 
-alt="TaggedValue system" align="right" width="540" border="10"/>
+#### **Providing Consistent Property Names**
 This TaggedValue Helper wrapper for Enterprise Architect, written in VBScript, intends to provide advanced users of EA with simpler access to TaggedValue properties with a set of consistent property names, an orthogonality which, as of this writing, is lacking in EA regarding the TaggedValues system (see tables below about the inconsistent naming of the properties in the EA API). On this page the word `Tag`, or the acronym `TV`, may occasionally be used instead of `TaggedValue`.
 
-####**Better Properties**
+Fig 1. Example of the use of TaggedValues automatically inserted in the class (using an MDG Technology for this):
+![Tagged Values Example (BoldForDelphi)](/images/TaggedValues%20Example--BoldForDelphi-Class.png)
+
+#### **Better Properties**
 One of the most important features of the wrapper which has been added, is the much smarter Value() property, which automagically delivers any Default() values, if any such default value was defined in your own **`<<Stereotypes>>`**'  "initial value" field, or as a last alternative if no other value was defined, in the "global" TaggedValue definitions stored in **`PropertyTypes`** (called Project | Settings | "**UML Types**" in the UI).
 
-The way one retrieves these values from the inner workings of EA are *also different* for some of the Tag types, and in some cases these values requires complex programming in order to be accessed, but again, this can't be done in a consistent manner using the EA API.  But the good news is that this helper wrapper does all this for you while hiding all the complexity. And it does more than so.
+The way in which one retrieves these values from the inner workings of EA are *also different* for some of the Tag types, and in some cases these values requires complex programming in order to be accessed, but again, this can't be done in a consistent manner using the EA API.  But the good news is that this helper wrapper does all this for you while hiding all the complexity. And it does more than so.
 
-####**More Properties**
+Fig 2. Listed here is the un-orthogonality of the TaggedValue names in the EA-database:
+![Chart of the "un-orthogonality if the EA-TaggedValues](/images/Chart-of-EA-TaggedValue-UnOrthogonality.jpg)
+
+Fig 3. And here a chart with the new renamed TaggedValue properties:
+![Renamed TaggedValue Properties](Chart_of_Renamed_EA_TaggedValues.jpg)
+
+#### **More Properties**
 Although differencies in the API exists between Tag types such as `EA.PackageTag`, `EA.ElementTag`, `EA.AttributeTag`, `EA.MethodTag` and `EA.ConnectorTag`, and most different of all, the EA.RoleTag, the differences disappears altogether when using this wrapper. And furthermore, the wrapper even provides with a set of more useful properties than the API, properties that can significantly simplify access to model info which would require sometimes quite complex coding, such as retrieval of parent info (for the `TaggedValues`), following *pathways which also is different* for different Tag types and especially for `RoleTags`, which can prove to be even difficult.
 
 A more detailed description can be found far below on this page, but for coders, let's get right at it with an example of how the wrapper is used, making your life easier dealing with TaggedValues with VBscript:
 
-#####**EXAMPLE OF USAGE:**#####
+##### **EXAMPLE OF USAGE:**#####
 ```vbs
 Dim tv As EA.TaggedValue
 For Each tv in Pkg.Element.TaggedValues
@@ -72,14 +69,14 @@ Or, if assuming that the TV really exists, use the more "direct" version of the 
 ```vbs
 S = TagApi.WrapByName("VBA.FileName", elem).Notes()
 ```
-####**Try or just nail it?**
+#### **Try or just nail it?**
 **Notice how** the `TryWrapByName()` method above is a Function returning `Boolean` in order to assist the programmer in determining whether any value or Tag with that name was found, whereas the WrapByName() returns the wrapper itself directly (no questions answered). In the latter case it will of course end up in an access violation if the named Tag turns out to not exist, but sometimes you just know what you have. But by reason of the uncertain cases the TryWrapByName function may be a better choice, at least if you are uncertain of whether the named Tag actually exist.
 
-###**DETAILED DESCRIPTION**
+### **DETAILED DESCRIPTION**
 
 **Missing, Renamed and Enhanced** - Some properties in EA's Api are "missing", but are published in the wrapper. This is useful when traversing the model structure and generic object names makes such loops easier. Some other properties have different names in EA's API, which the wrapper of course aligns using consistsnt naming for all Tag types. And the most important property of the all, the `Value()` property, derives its value (if it's own direct value is not specified) from Default values specified in other places, if any default values are defined at all. 
  
-####**"Fake Polymorphism"**
+#### **"Fake Polymorphism"**
 <img src="http://wiki.rilpartner.se/w/images/wiki.rilpartner.se/0/03/TaggedValue_Default_from_Stereotype.jpg" 
 alt="PropertyTypes / UML Types" align="right" width="480" border="10"/>
 **The derivation follows this order** : If no *direct* value is specified a a Value() then it attempts to derive a default value from #1  `Stereotype's` "initial value" (if defined) for a given TaggedValue. 
@@ -90,23 +87,24 @@ Only if no default values are defined and no direct value is specified (by the u
  
 **An important extra feature** is that the wrapper class also provides easy access to the TaggedValue's parent objects, such as Classes, Attributes and, most difficult to access, ConnectionEnd objects for RoleTags. Property names are "aligned" to be close to similar to the property names of the EA.TaggedValue type, and the user of the class will never have to care about whether the `TaggedValue` (owned by classes, packages and interfaces) is an `AttributeTag`, `MethodTag`, `ConnectorTag` or `RoleTag` since all properties are the same (orthogonal).
 
-###**STATISTICS**
+### **STATISTICS**
 
 Support for collecting some basic runtime statistics about the number of times TaggedValues has been accessed and time spent evaluating them, has also been implemented in the wrapper. This functionality can be "disabled" from the code base altogether by using the following [Regular Expression](http://www.regular-expressions.info) (tested with **EditPad Lite**, a free version can be downloaded from [here](http://www.editpadlite.com/download.html "EditPad's Download page") ). Expressions to be used are the following:
 
-######**DISABLE** the Stats code in the source code (by commenting):
+###### **DISABLE** the Stats code in the source code (by commenting):
 	Regex Search:		^(?!'//)(.*?\(\(\$stats\)\).*?$)
 	Regex Replace:		'//\1
-######**ENABLE** the `Stats` code rows in the source (removes commenting):
+	
+###### **ENABLE** the `Stats` code rows in the source (removes commenting):
 	Regex Search:		^(?='//)'//(.*?\(\(\$stats\)\).*?$)
 	Regex Replace:		\1
 
-#####**TODO**
+##### **TODO**
     Property `IsInterfaceTag()` - Needs checking of the Stereotype in order to be 
                                   distinguished from a regular Class.
 
 ----
-##**CLASS MEMBERS**
+## **CLASS MEMBERS**
 First the most frequently used Properties & Functions, and below that a full list of public members:
 
 ```vbs
@@ -211,3 +209,10 @@ Private Sub ResetData() ''': Void
 Private Sub ResetStats() ''': Void				''' (($stats))
 End Class
 ```
+
+<dl>
+<table>
+<tr><td>Author:</td><td>Rolf Lampa, laromai(at)rilnet(.)com</td></tr>
+<tr><td>MIT. Copyright:</td><td>(C) Rolf Lampa, 2015. This script is free to use for commercial projects provided proper attribution is given by adding this copyright info in in your code and product documentation, including a link to this page.</td></tr>
+</table>
+</dl>
