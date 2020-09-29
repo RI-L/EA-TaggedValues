@@ -209,16 +209,3 @@ Private Sub ResetData() ''': Void
 Private Sub ResetStats() ''': Void				''' (($stats))
 End Class
 ```
-
-###**Donations**
-Although we love to provide useful things for free saving you lots of time and hassle, we also spend lots of time making the life easier for EA developers. If you find the script being useful you may consider making a donation. All amounts amounts. For Paypal donations, use the following 
-[Paypal Link](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2VFSWN93XEPZ2 "Paypal's Secure Pages")
-
-<dl>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="KJCD6N8M8MRWQ">
-<input type="image" src="https://www.paypalobjects.com/en_US/SE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-</dl>
