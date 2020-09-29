@@ -19,6 +19,7 @@
 This TaggedValue Helper wrapper for Enterprise Architect, written in VBScript, intends to provide advanced users of EA with simpler access to TaggedValue properties with a set of consistent property names, an orthogonality which, as of this writing, is lacking in EA regarding the TaggedValues system (see tables below about the inconsistent naming of the properties in the EA API). On this page the word `Tag`, or the acronym `TV`, may occasionally be used instead of `TaggedValue`.
 
 Fig 1. Example of the use of TaggedValues automatically inserted in the class (using an MDG Technology for this):
+
 ![Tagged Values Example (BoldForDelphi)](/images/TaggedValues%20Example--BoldForDelphi-Class.png)
 
 #### **Better Properties**
@@ -27,6 +28,7 @@ One of the most important features of the wrapper which has been added, is the m
 The way in which one retrieves these values from the inner workings of EA are *also different* for some of the Tag types, and in some cases these values requires complex programming in order to be accessed, but again, this can't be done in a consistent manner using the EA API.  But the good news is that this helper wrapper does all this for you while hiding all the complexity. And it does more than so.
 
 Fig 2. Listed here is the un-orthogonality of the TaggedValue names in the EA-database:
+
 ![Chart of the "un-orthogonality if the EA-TaggedValues](/images/Chart-of-EA-TaggedValue-UnOrthogonality.jpg)
 
 Fig 3. And here a chart with the new renamed TaggedValue properties:
@@ -37,7 +39,7 @@ Although differencies in the API exists between Tag types such as `EA.PackageTag
 
 A more detailed description can be found far below on this page, but for coders, let's get right at it with an example of how the wrapper is used, making your life easier dealing with TaggedValues with VBscript:
 
-##### **EXAMPLE OF USAGE:**#####
+##### **EXAMPLE OF USAGE **#####
 ```vbs
 Dim tv As EA.TaggedValue
 For Each tv in Pkg.Element.TaggedValues
