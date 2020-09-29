@@ -1,4 +1,6 @@
 
+![Tagged Values Example (BoldForDelphi)](/images/TaggedValues%20Example--BoldForDelphi-Class.png)
+
 #**TaggedValue Helper for EA**
 
 <dl>
