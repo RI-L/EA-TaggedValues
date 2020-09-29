@@ -32,7 +32,8 @@ Fig 2. Listed here is the un-orthogonality of the TaggedValue names in the EA-da
 ![Chart of the "un-orthogonality if the EA-TaggedValues](/images/Chart-of-EA-TaggedValue-UnOrthogonality.jpg)
 
 Fig 3. And here a chart with the new renamed TaggedValue properties:
-![Renamed TaggedValue Properties](Chart_of_Renamed_EA_TaggedValues.jpg)
+
+![Renamed TaggedValue Properties](/images/Chart_of_Renamed_EA_TaggedValues.jpg)
 
 #### **More Properties**
 Although differencies in the API exists between Tag types such as `EA.PackageTag`, `EA.ElementTag`, `EA.AttributeTag`, `EA.MethodTag` and `EA.ConnectorTag`, and most different of all, the EA.RoleTag, the differences disappears altogether when using this wrapper. And furthermore, the wrapper even provides with a set of more useful properties than the API, properties that can significantly simplify access to model info which would require sometimes quite complex coding, such as retrieval of parent info (for the `TaggedValues`), following *pathways which also is different* for different Tag types and especially for `RoleTags`, which can prove to be even difficult.
